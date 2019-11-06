@@ -1,8 +1,17 @@
-import { SheetService } from './sheet.service';
-
 declare var global: any;
 
-global.createNewFile = (): void => {
-  const ss = SheetService.createInitialFile('New file');
-  ss.getRange('A2').setValue('Happy gas!');
+global.onOpen = (event: any): void => {
+  SlidesApp.getUi()
+    .createAddonMenu()
+    .addItem('Open quickurl', 'showSidebar')
+    .addToUi();
+};
+
+global.onInstall = (event: any): void => {
+  global.onOpen(event);
+};
+
+global.showSidebar = (): void => {
+  const ui = HtmlService.createHtmlOutputFromFile('sidebar').setTitle('QuickUrl');
+  SlidesApp.getUi().showSidebar(ui);
 };

@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="block form-group">
+        <label for="input-url">
+          <b>URL:</b>
+        </label>
+        <input type="url" id="input-url" placeholder="Enter a long URL">
+      </div>
+      
+      <div class="block">
+        <input type="checkbox" name="quickurl-option" value="QR_CODE">
+        <label for="quickurl-option">
+          QR Code
+        </label>
+        <br/>
+        <input type="checkbox" name="quickurl-option" value="SHORT_URL">
+        <label for="quickurl-option">
+          Short URL
+        </label>
+      </div>
+      
+      <div class="block">
+        <button class="blue" id="btn-generate">Generate</button>
+      </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+      $(function() {
+        $('#btn-generate').click(runServerFunction);
+      });
+
+      function runServerFunction() {
+      }
+    </script>
+  </body>
+</html>
