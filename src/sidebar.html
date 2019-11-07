@@ -24,17 +24,35 @@
       </div>
       
       <div class="block">
-        <button class="blue" id="btn-generate">Generate</button>
+        <button class="blue" id="btn-insert">Insert</button>
+      </div>
+
+      <div class="block">
+        <span class="current" id="txt-error"></span>
       </div>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
       $(function() {
-        $('#btn-generate').click(runServerFunction);
+        $('#btn-insert').click(runInsertQuickUrl);
       });
 
-      function runServerFunction() {
+      function runInsertQuickUrl() {
+        clearMsgs();
+
+        google.script.run
+          .withSuccessHandler()
+          .withFailureHandler(onFailure)
+          .insertQuickUrl();
+      }
+
+      function clearMsgs() {
+        $('#txt-error').html("");
+      }
+
+      function onFailure(error) {
+        $('#txt-error').html("ERROR: " + error.message);
       }
     </script>
   </body>
