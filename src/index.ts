@@ -26,11 +26,17 @@ global.insertQuickUrl = insertQuickUrl;
  * @param options Array of enum options: QR_CODE, SHORT_URL...
  */
 function insertQuickUrl(url: string, options: [string]): void {
-  options.forEach(option => {
-    const inserter = QuickUrlService.getInserter(option);
+  try {
+    options.forEach(option => {
+      const inserter = QuickUrlService.getInserter(option);
 
-    const shortenedItem = inserter.transform(url);
+      const shortenedItem = inserter.transform(url);
 
-    inserter.insert(shortenedItem);
-  });
+      inserter.insert(shortenedItem);
+    });
+  } catch (error) {
+    Logger.log(error.message);
+    // rethrow a user-friendly error
+    throw new Error('Something wrong occurred.');
+  }
 }
