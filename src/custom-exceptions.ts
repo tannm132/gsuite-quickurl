@@ -6,4 +6,13 @@ class NotImplementedError extends Error {
   }
 }
 
+class GDocRelatedError extends Error {
+  constructor(...params: any) {
+    super(...params);
+
+    this.name = 'GDocRelatedError';
+  }
+}
+
 export { NotImplementedError };
+export { GDocRelatedError };

@@ -5,4 +5,4 @@ interface IInserter {
   insert(item: ITransformed): void;
 }
 
-export { IInserter };
+export { IInserter, ITransformed };
