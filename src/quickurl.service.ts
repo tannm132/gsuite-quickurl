@@ -1,4 +1,7 @@
 import { IInserter } from './IInserter.interface';
+import { NotImplementedError } from './custom-exceptions';
+import { QrCodeInserter } from '../src/qrcode-inserter';
+import { ShortUrlInserter } from '../src/shorturl-inserter';
 
 enum ShortenOption {
   QrCode = 'QR_CODE',
@@ -6,16 +9,22 @@ enum ShortenOption {
 }
 
 class QuickUrlService {
-  static getInserter(option: string): IInserter {
-    let inserter;
+  /**
+   * Return the inserter with given option
+   * @param option shortening option
+   */
+  static getInserter(option: string = ''): IInserter {
+    let inserter: IInserter;
 
     switch (option) {
       case ShortenOption.QrCode:
+        inserter = new QrCodeInserter();
         break;
       case ShortenOption.ShortUrl:
+        inserter = new ShortUrlInserter();
         break;
       default:
-        break;
+        throw new NotImplementedError('Inserter not available.');
     }
 
     return inserter;
