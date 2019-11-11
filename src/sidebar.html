@@ -40,18 +40,38 @@
 
       function runInsertQuickUrl() {
         clearMsgs();
+        this.disabled = true;
+        var userInputObj = getUserInput();
 
         google.script.run
-          .withSuccessHandler()
+          .withSuccessHandler(onSuccess)
           .withFailureHandler(onFailure)
-          .insertQuickUrl();
+          .withUserObject(this)
+          .insertQuickUrl(userInputObj.url, userInputObj.options);
       }
 
       function clearMsgs() {
         $('#txt-error').html("");
       }
 
-      function onFailure(error) {
+      function getUserInput() {
+        var resultObj = {};
+
+        resultObj.url = $('#input-url').val();
+
+        resultObj.options = $('input[type=checkbox][name=quickurl-option]:checked').map(function() {
+          return $(this).val();
+        }).get();
+
+        return resultObj;
+      }
+
+      function onSuccess(result, element) {
+        element.disabled = false;
+      }
+
+      function onFailure(error, element) {
+        element.disabled = false;
         $('#txt-error').html(error.message);
       }
     </script>
