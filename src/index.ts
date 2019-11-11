@@ -36,6 +36,7 @@ function insertQuickUrl(url: string, options: [string]): void {
     });
   } catch (error) {
     Logger.log(error.message);
+    Logger.log(error.stack);
     // rethrow a user-friendly error
     throw new Error('Something wrong occurred.');
   }
