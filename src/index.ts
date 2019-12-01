@@ -1,4 +1,5 @@
 import { QuickUrlService } from './quickurl.service';
+import * as Exceptions from './custom-exceptions';
 
 declare var global: any;
 
@@ -37,7 +38,12 @@ function insertQuickUrl(url: string, options: [string]): void {
   } catch (error) {
     Logger.log(error.message);
     Logger.log(error.stack);
-    // rethrow a user-friendly error
-    throw new Error('Something wrong occurred.');
+
+    if (error instanceof Exceptions.ExecutionError) {
+      throw error;
+    } else {
+      // rethrow a user-friendly error
+      throw new Error('Something wrong occurred.');
+    }
   }
 }

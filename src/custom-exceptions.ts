@@ -1,18 +1,14 @@
-class NotImplementedError extends Error {
+class CustomError extends Error {
   constructor(...params: any) {
     super(...params);
-
-    this.name = 'NotImplementedError';
+    this.name = this.constructor.name;
   }
 }
 
-class GDocRelatedError extends Error {
-  constructor(...params: any) {
-    super(...params);
-
-    this.name = 'GDocRelatedError';
-  }
-}
+class NotImplementedError extends CustomError {}
+class GDocRelatedError extends CustomError {}
+class ExecutionError extends CustomError {}
 
 export { NotImplementedError };
 export { GDocRelatedError };
+export { ExecutionError };
